@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -Wall
+CFLAGS = -Wall -DSDL_MAIN_HANDLED
 LDFLAGS = -lSDL2 -lcairo
 EXE = sdl2-cairo
 
