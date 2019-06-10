@@ -2,12 +2,16 @@
 SDL2 and cairo example.
 
 ## Compile
-`$ make`
+```sh
+make
+```
 
 ## Usage
-`$ ./sdl2-cairo`
+```sh
+./sdl2-cairo
+```
 
 ## Referrences
-https://cairographics.org/SDL/
-https://cairographics.org/samples/
-https://github.com/rozaxe/ex-harfbuzz-sdl2-cairo-freetype-emoji
+- https://cairographics.org/SDL/
+- https://cairographics.org/samples/
+- https://github.com/rozaxe/ex-harfbuzz-sdl2-cairo-freetype-emoji
