@@ -5,16 +5,14 @@ int main(void)
 {
         SDL_Init(SDL_INIT_VIDEO);
 
-        SDL_Window *window;
-        window = SDL_CreateWindow("An SDL2 window",
+        SDL_Window *window = SDL_CreateWindow("An SDL2 window",
                                   SDL_WINDOWPOS_UNDEFINED,
                                   SDL_WINDOWPOS_UNDEFINED,
                                   640,
                                   480,
                                   SDL_WINDOW_SHOWN | SDL_WINDOW_ALLOW_HIGHDPI);
 
-        SDL_Renderer *renderer;
-        renderer = SDL_CreateRenderer(window,
+        SDL_Renderer *renderer = SDL_CreateRenderer(window,
                                       -1,
                                       SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
@@ -29,8 +27,7 @@ int main(void)
         int cairo_x_multiplier = renderer_width / window_width;
 	int cairo_y_multiplier = renderer_height / window_height;
 
-        SDL_Surface *sdl_surface;
-        sdl_surface = SDL_CreateRGBSurface (0,
+        SDL_Surface *sdl_surface = SDL_CreateRGBSurface (0,
                                             renderer_width,
                                             renderer_height,
                                             32,

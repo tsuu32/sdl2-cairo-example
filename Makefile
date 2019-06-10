@@ -4,7 +4,7 @@ LDFLAGS = -lSDL2 -lcairo
 EXE = sdl2-cairo
 
 ifeq ($(OS), Windows_NT)
-CFLAGS +=  -DSDL_MAIN_HANDLED
+CFLAGS += -DSDL_MAIN_HANDLED
 endif
 
 all: $(EXE)
