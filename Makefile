@@ -5,7 +5,7 @@ TARGET = sdl2-cairo
 
 ifeq ($(OS),Windows_NT)
 	CFLAGS += -DSDL_MAIN_HANDLED
-	LDFLAGS = -static `pkg-config --static --libs` -liconv -lstdc++ -lwinpthread
+	LDFLAGS = -static `pkg-config --static --libs SDL2 cairo` -liconv -lstdc++ -lwinpthread
 endif
 
 all: $(TARGET)
