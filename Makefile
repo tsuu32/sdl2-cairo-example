@@ -1,17 +1,18 @@
 CC = cc
 CFLAGS = -Wall
 LDFLAGS = -lSDL2 -lcairo
-EXE = sdl2-cairo
+TARGET = sdl2-cairo
 
-ifeq ($(OS), Windows_NT)
-CFLAGS += -DSDL_MAIN_HANDLED
+ifeq ($(OS),Windows_NT)
+	CFLAGS += -DSDL_MAIN_HANDLED
+	LDFLAGS = -static `pkg-config --static --libs` -liconv -lstdc++ -lwinpthread
 endif
 
-all: $(EXE)
+all: $(TARGET)
 
-$(EXE): $(EXE).c
+$(TARGET): $(TARGET).c
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 .PHONY: clean
 clean:
-	$(RM) $(EXE)
+	$(RM) $(TARGET)
