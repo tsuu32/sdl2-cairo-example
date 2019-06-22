@@ -11,6 +11,11 @@ make
 ./sdl2-cairo
 ```
 
+## platform
+- Ubuntu
+- macOS
+- MSYS2 + MinGW-w64 (Windows 10)
+
 ## Referrences
 - https://cairographics.org/SDL/
 - https://cairographics.org/samples/
