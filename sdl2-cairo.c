@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <SDL2/SDL.h>
 #include <cairo/cairo.h>
 
@@ -17,17 +18,17 @@ int main(void)
                                       SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
         int window_width;
-	int window_height;
-	SDL_GetWindowSize(window, &window_width, &window_height);
+        int window_height;
+        SDL_GetWindowSize(window, &window_width, &window_height);
 
-	int renderer_width;
-	int renderer_height;
-	SDL_GetRendererOutputSize(renderer, &renderer_width, &renderer_height);
+        int renderer_width;
+        int renderer_height;
+        SDL_GetRendererOutputSize(renderer, &renderer_width, &renderer_height);
 
         int cairo_x_multiplier = renderer_width / window_width;
-	int cairo_y_multiplier = renderer_height / window_height;
+        int cairo_y_multiplier = renderer_height / window_height;
 
-        SDL_Surface *sdl_surface = SDL_CreateRGBSurface (0,
+        SDL_Surface *sdl_surface = SDL_CreateRGBSurface(0,
                                             renderer_width,
                                             renderer_height,
                                             32,
@@ -35,17 +36,17 @@ int main(void)
                                             0x0000ff00,
                                             0x000000ff,
                                             0);
-        
+
         printf("sdl_surface->w=%d\nsdl_surface->h=%d\nsdl_surface->pitch=%d\n",sdl_surface->w,sdl_surface->h,sdl_surface->pitch);
         printf("sdl_surface->format->format=%s\n", SDL_GetPixelFormatName(sdl_surface->format->format));
 
-	cairo_surface_t *cairo_surface = cairo_image_surface_create_for_data ((unsigned char *)sdl_surface->pixels,
-                                                                              CAIRO_FORMAT_RGB24,
-                                                                              sdl_surface->w,
-                                                                              sdl_surface->h,
-                                                                              sdl_surface->pitch);
+        cairo_surface_t *cairo_surface = cairo_image_surface_create_for_data((unsigned char *)sdl_surface->pixels,
+                                                                             CAIRO_FORMAT_RGB24,
+                                                                             sdl_surface->w,
+                                                                             sdl_surface->h,
+                                                                             sdl_surface->pitch);
 
-	cairo_surface_set_device_scale(cairo_surface, cairo_x_multiplier, cairo_y_multiplier);
+        cairo_surface_set_device_scale(cairo_surface, cairo_x_multiplier, cairo_y_multiplier);
 
         cairo_t *cairo_context = cairo_create(cairo_surface);
 
@@ -58,8 +59,8 @@ int main(void)
         double xc = 320.0;
         double yc = 240.0;
         double radius = 200.0;
-        double angle1 = 45.0  * (M_PI/180.0);  /* angles are specified */
-        double angle2 = 180.0 * (M_PI/180.0);  /* in radians           */
+        double angle1 = 45.0  * (M_PI/180.0);
+        double angle2 = 180.0 * (M_PI/180.0);
 
         cairo_set_source_rgba(cairo_context, 0, 0, 0, 1.0);
         cairo_set_line_width(cairo_context, 10.0);
@@ -97,7 +98,7 @@ int main(void)
         }
 
         cairo_surface_destroy(cairo_surface);
-	cairo_destroy(cairo_context);
+        cairo_destroy(cairo_context);
 
         SDL_FreeSurface(sdl_surface);
         SDL_DestroyWindow(window);

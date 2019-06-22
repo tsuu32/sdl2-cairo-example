@@ -10,7 +10,7 @@ endif
 
 all: $(TARGET)
 
-$(TARGET): $(TARGET).c
+%: %.c
 	$(CC) $(CFLAGS) $^ -o $@ $(LDFLAGS)
 
 .PHONY: clean
