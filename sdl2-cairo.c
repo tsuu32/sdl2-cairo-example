@@ -84,7 +84,7 @@ int main(void)
         SDL_RenderPresent(renderer);
 
         int done = 0;
-        while (done == 0) {
+        while (!done) {
                 SDL_Event event;
                 while (SDL_PollEvent(&event)) {
                         switch (event.type) {
