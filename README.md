@@ -1,7 +1,7 @@
 # sdl2-cairo-example
-SDL2 and cairo example.
+A simple SDL2 and cairo example.
 
-## Compile
+## Build
 ```sh
 make
 ```
@@ -11,7 +11,13 @@ make
 ./sdl2-cairo
 ```
 
-## platform
+## Screenshot
+![img](screenshot.png)
+
+## Platform
+SDL2 is a cross-platform library.
+It has been confirmed that `sdl2-cairo` runs on following platforms.
+
 - Ubuntu
 - macOS
 - MSYS2 + MinGW-w64 (Windows 10)
