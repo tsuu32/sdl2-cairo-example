@@ -16,7 +16,7 @@ make
 - macOS
 - MSYS2 + MinGW-w64 (Windows 10)
 
-## Referrences
+## Helpful Links
 - https://cairographics.org/SDL/
 - https://cairographics.org/samples/
 - https://github.com/rozaxe/ex-harfbuzz-sdl2-cairo-freetype-emoji
