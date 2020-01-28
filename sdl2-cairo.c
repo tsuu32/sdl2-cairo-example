@@ -2,7 +2,8 @@
 #include <SDL2/SDL.h>
 #include <cairo/cairo.h>
 
-int main(void)
+int
+main(int argc, char *argv[])
 {
   SDL_Init(SDL_INIT_VIDEO);
 
