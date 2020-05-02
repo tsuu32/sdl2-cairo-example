@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <SDL2/SDL.h>
 #include <cairo/cairo.h>
 
@@ -87,13 +88,13 @@ main(int argc, char *argv[])
   SDL_RenderCopy(renderer, texture, NULL, NULL);
   SDL_RenderPresent(renderer);
 
-  int done = 0;
+  bool done = false;
   while (!done) {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {
       switch (event.type) {
       case SDL_QUIT:
-        done = 1;
+        done = true;
         break;
       default:
         break;
