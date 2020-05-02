@@ -23,9 +23,17 @@ main(int argc, char *argv[])
   int window_height;
   SDL_GetWindowSize(window, &window_width, &window_height);
 
+  printf("window_width=%d\n"
+         "window_height=%d\n",
+         window_width, window_height);
+
   int renderer_width;
   int renderer_height;
   SDL_GetRendererOutputSize(renderer, &renderer_width, &renderer_height);
+
+  printf("renderer_width=%d\n"
+         "renderer_height=%d\n",
+         renderer_width, renderer_height);
 
   int cairo_x_multiplier = renderer_width / window_width;
   int cairo_y_multiplier = renderer_height / window_height;
@@ -39,9 +47,12 @@ main(int argc, char *argv[])
                                                   0x000000ff,
                                                   0);
 
-  printf("sdl_surface->w=%d\nsdl_surface->h=%d\nsdl_surface->pitch=%d\n",
+  printf("sdl_surface->w=%d\n"
+         "sdl_surface->h=%d\n"
+         "sdl_surface->pitch=%d\n",
          sdl_surface->w, sdl_surface->h, sdl_surface->pitch);
-  printf("sdl_surface->format->format=%s\n", SDL_GetPixelFormatName(sdl_surface->format->format));
+  printf("sdl_surface->format->format=%s\n",
+         SDL_GetPixelFormatName(sdl_surface->format->format));
 
   cairo_surface_t *cairo_surface = cairo_image_surface_create_for_data((unsigned char *)sdl_surface->pixels,
                                                                        CAIRO_FORMAT_RGB24,
@@ -53,10 +64,13 @@ main(int argc, char *argv[])
 
   cairo_t *cairo_context = cairo_create(cairo_surface);
 
-  // Make white background by SDL2 API
+  SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+  SDL_RenderClear(renderer);
+
+  // White background with SDL2 API
   // SDL_FillRect(sdl_surface, NULL, SDL_MapRGB(sdl_surface->format, 255, 255, 255));
 
-  // Make white background by cairo API
+  // White background with cairo API
   cairo_set_source_rgba(cairo_context, 1, 1, 1, 1.0);
   cairo_rectangle(cairo_context, 0, 0, 640, 480);
   cairo_fill(cairo_context);
@@ -85,6 +99,8 @@ main(int argc, char *argv[])
   cairo_stroke(cairo_context);
 
   SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, sdl_surface);
+  SDL_FreeSurface(sdl_surface);
+
   SDL_RenderCopy(renderer, texture, NULL, NULL);
   SDL_RenderPresent(renderer);
 
@@ -102,10 +118,11 @@ main(int argc, char *argv[])
     }
   }
 
-  cairo_surface_destroy(cairo_surface);
   cairo_destroy(cairo_context);
+  cairo_surface_destroy(cairo_surface);
 
-  SDL_FreeSurface(sdl_surface);
+  SDL_DestroyTexture(texture);
+  SDL_DestroyRenderer(renderer);
   SDL_DestroyWindow(window);
 
   SDL_Quit();
