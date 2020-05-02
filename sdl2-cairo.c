@@ -54,15 +54,15 @@ main(int argc, char *argv[])
   printf("sdl_surface->format->format=%s\n",
          SDL_GetPixelFormatName(sdl_surface->format->format));
 
-  cairo_surface_t *cairo_surface = cairo_image_surface_create_for_data((unsigned char *)sdl_surface->pixels,
+  cairo_surface_t *cr_surface = cairo_image_surface_create_for_data((unsigned char *)sdl_surface->pixels,
                                                                        CAIRO_FORMAT_RGB24,
                                                                        sdl_surface->w,
                                                                        sdl_surface->h,
                                                                        sdl_surface->pitch);
 
-  cairo_surface_set_device_scale(cairo_surface, cairo_x_multiplier, cairo_y_multiplier);
+  cairo_surface_set_device_scale(cr_surface, cairo_x_multiplier, cairo_y_multiplier);
 
-  cairo_t *cairo_context = cairo_create(cairo_surface);
+  cairo_t *cr = cairo_create(cr_surface);
 
   SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
   SDL_RenderClear(renderer);
@@ -71,9 +71,9 @@ main(int argc, char *argv[])
   // SDL_FillRect(sdl_surface, NULL, SDL_MapRGB(sdl_surface->format, 255, 255, 255));
 
   // White background with cairo API
-  cairo_set_source_rgba(cairo_context, 1, 1, 1, 1.0);
-  cairo_rectangle(cairo_context, 0, 0, 640, 480);
-  cairo_fill(cairo_context);
+  cairo_set_source_rgba(cr, 1, 1, 1, 1.0);
+  cairo_rectangle(cr, 0, 0, 640, 480);
+  cairo_fill(cr);
 
   double xc = 320.0;
   double yc = 240.0;
@@ -81,22 +81,22 @@ main(int argc, char *argv[])
   double angle1 = 45.0  * (M_PI/180.0);
   double angle2 = 180.0 * (M_PI/180.0);
 
-  cairo_set_source_rgba(cairo_context, 0, 0, 0, 1.0);
-  cairo_set_line_width(cairo_context, 10.0);
-  cairo_arc(cairo_context, xc, yc, radius, angle1, angle2);
-  cairo_stroke(cairo_context);
+  cairo_set_source_rgba(cr, 0, 0, 0, 1.0);
+  cairo_set_line_width(cr, 10.0);
+  cairo_arc(cr, xc, yc, radius, angle1, angle2);
+  cairo_stroke(cr);
 
-  cairo_set_source_rgba(cairo_context, 1, 0.2, 0.2, 0.6);
-  cairo_set_line_width(cairo_context, 6.0);
+  cairo_set_source_rgba(cr, 1, 0.2, 0.2, 0.6);
+  cairo_set_line_width(cr, 6.0);
 
-  cairo_arc(cairo_context, xc, yc, 10.0, 0, 2*M_PI);
-  cairo_fill(cairo_context);
+  cairo_arc(cr, xc, yc, 10.0, 0, 2*M_PI);
+  cairo_fill(cr);
 
-  cairo_arc(cairo_context, xc, yc, radius, angle1, angle1);
-  cairo_line_to(cairo_context, xc, yc);
-  cairo_arc(cairo_context, xc, yc, radius, angle2, angle2);
-  cairo_line_to(cairo_context, xc, yc);
-  cairo_stroke(cairo_context);
+  cairo_arc(cr, xc, yc, radius, angle1, angle1);
+  cairo_line_to(cr, xc, yc);
+  cairo_arc(cr, xc, yc, radius, angle2, angle2);
+  cairo_line_to(cr, xc, yc);
+  cairo_stroke(cr);
 
   SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, sdl_surface);
   SDL_FreeSurface(sdl_surface);
@@ -118,8 +118,8 @@ main(int argc, char *argv[])
     }
   }
 
-  cairo_destroy(cairo_context);
-  cairo_surface_destroy(cairo_surface);
+  cairo_destroy(cr);
+  cairo_surface_destroy(cr_surface);
 
   SDL_DestroyTexture(texture);
   SDL_DestroyRenderer(renderer);
