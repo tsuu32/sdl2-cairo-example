@@ -116,6 +116,7 @@ main(int argc, char *argv[])
         break;
       }
     }
+    SDL_Delay(100);
   }
 
   cairo_destroy(cr);
